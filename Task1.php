@@ -1,15 +1,25 @@
 <?php
 
-// Function to retrieve product details by ID
-function get_product($products, $productId) {
-    $productDetails = null; // Initialize with null to handle cases where the product is not found
-    foreach ($products as $product) {
-        if ($product['id'] == $productId) { // Corrected the assignment operator and added a missing parenthesis
-            $productDetails = $product;
-            break; // Stop the loop once the product is found
-        }
+// Class representing a product manager with encapsulated products array
+class ProductManager {
+    private $products;
+
+    // Constructor to set the initial products array
+    public function __construct($products) {
+        $this->products = $products;
     }
-    return $productDetails;
+
+    // Method to retrieve product details by ID
+    public function getProduct($productId) {
+        $productDetails = null;
+        foreach ($this->products as $product) {
+            if ($product['id'] == $productId) {
+                $productDetails = $product;
+                break;
+            }
+        }
+        return $productDetails;
+    }
 }
 
 $products = [
@@ -18,8 +28,12 @@ $products = [
     ['id' => 103, 'name' => 'Product 3', 'price' => 120.00],
 ];
 
+// Creating an instance of ProductManager with dependency injection
+$productManager = new ProductManager($products);
+
 $productId = 102;
-$product = get_product($products, $productId);
+$product = $productManager->getProduct($productId);
 echo 'Product Name: ' . $product['name'] . "\n";
 echo 'Product Price: ' . $product['price'] . "\n";
+
 
