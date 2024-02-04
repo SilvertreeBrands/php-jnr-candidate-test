@@ -1,10 +1,12 @@
-</php
+<?php
 
-function get_products($products, $productId) {
-    $productDetails = [];
+// Function to retrieve product details by ID
+function get_product($products, $productId) {
+    $productDetails = null; // Initialize with null to handle cases where the product is not found
     foreach ($products as $product) {
-        if($product['id'] = $productId)) {
+        if ($product['id'] == $productId) { // Corrected the assignment operator and added a missing parenthesis
             $productDetails = $product;
+            break; // Stop the loop once the product is found
         }
     }
     return $productDetails;
@@ -20,3 +22,4 @@ $productId = 102;
 $product = get_product($products, $productId);
 echo 'Product Name: ' . $product['name'] . "\n";
 echo 'Product Price: ' . $product['price'] . "\n";
+
